@@ -1,166 +1,124 @@
 :root {
-    --bg-color: #f4f7f6;
-    --card-color: #ffffff;
-    --primary-color: #4a90e2;
-    --success-color: #2ecc71;
-    --text-color: #333333;
-    --border-color: #dddddd;
+    --fundo-azul: #004488;
+    --texto-branco: #ffffff;
+    --contorno-verde: #2ecc71;
+    --azul-escuro: #003366;
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    margin: 0;
-    padding: 20px;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: var(--fundo-azul);
+    color: var(--texto-branco);
     display: flex;
     justify-content: center;
+    padding: 20px;
+    margin: 0;
 }
 
 .container {
-    background-color: var(--card-color);
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    background-color: var(--azul-escuro);
+    padding: 25px;
+    border-radius: 15px;
+    border: 2px solid var(--contorno-verde); /* Contorno verde principal */
     width: 100%;
-    max-width: 500px;
+    max-width: 450px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
 }
 
-.hidden {
-    display: none !important;
-}
+.hidden { display: none !important; }
 
-h2, h3, h4 {
-    margin-top: 0;
-    text-align: center;
-}
+h2, h3, h4 { color: var(--texto-branco); text-align: center; }
 
-/* Formulários e Inputs */
-.input-group {
-    margin-bottom: 15px;
-}
-
-.input-group label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-input[type="text"], input[type="password"], input[type="date"] {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid var(--border-color);
-    border-radius: 6px;
-    box-sizing: border-box;
-    font-size: 16px;
-}
-
-.btn {
+/* Inputs e Botões */
+input, select {
     width: 100%;
     padding: 12px;
-    background-color: var(--primary-color);
+    margin: 8px 0;
+    border: 2px solid var(--contorno-verde); /* Contorno verde nos campos */
+    border-radius: 8px;
+    background: #002244;
     color: white;
+    box-sizing: border-box;
+}
+
+::placeholder { color: #aaa; }
+
+.btn, .btn-add {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--contorno-verde);
+    color: var(--azul-escuro);
     border: none;
-    border-radius: 6px;
-    font-size: 16px;
+    border-radius: 8px;
     cursor: pointer;
     font-weight: bold;
+    font-size: 16px;
+    margin-top: 10px;
 }
 
-.btn:hover {
-    opacity: 0.9;
-}
+.btn:hover, .btn-add:hover { background-color: #27ae60; }
 
-/* Abas de Navegação */
+/* Abas */
 .tabs {
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
-    border-bottom: 2px solid var(--border-color);
+    gap: 5px;
+    margin: 20px 0;
+    border-bottom: 2px solid var(--contorno-verde);
 }
 
 .tab-btn {
     flex: 1;
     padding: 10px;
-    background: none;
     border: none;
-    font-size: 14px;
+    background: none;
     cursor: pointer;
+    color: #ccc;
     font-weight: bold;
-    color: #777;
 }
 
 .tab-btn.active {
-    color: var(--primary-color);
-    border-bottom: 3px solid var(--primary-color);
+    color: var(--contorno-verde);
+    border-bottom: 3px solid var(--contorno-verde);
 }
 
-/* Elementos do Painel */
-.card {
-    border: 1px solid var(--border-color);
+/* Lista de Tarefas */
+.lista { list-style: none; padding: 0; margin-top: 20px; }
+
+.item-card {
+    background: #003366;
     padding: 15px;
-    border-radius: 8px;
-    background-color: #fafafa;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    border: 2px solid var(--contorno-verde); /* Contorno verde nos cartões */
+    position: relative;
 }
 
-.checkbox-container {
-    display: block;
-    margin-top: 15px;
-    font-size: 14px;
+.item-card.concluido {
+    background-color: #064d25;
+    border-color: #ffffff;
+}
+
+.btn-remove {
+    background: none;
+    color: #ff4d4d;
+    border: none;
+    font-weight: bold;
     cursor: pointer;
-}
-
-.lista {
-    list-style: none;
-    padding: 0;
-    margin-top: 20px;
-}
-
-.lista li {
-    background: #f9f9f9;
-    padding: 10px;
-    border-left: 4px solid var(--primary-color);
-    margin-bottom: 8px;
-    border-radius: 4px;
-    display: flex;
-    justify-content: space-between;
+    float: right;
 }
 
 /* Pomodoro */
-.pomodoro-container {
-    text-align: center;
-    padding: 20px;
-}
-
-#pomodoro-status {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 10px;
-    color: var(--primary-color);
-}
-
-#timer {
-    font-size: 64px;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
-.timer-controls {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-}
-
-.btn-timer {
+.pomodoro-box { text-align: center; }
+#timer { font-size: 70px; font-weight: bold; margin: 20px 0; color: var(--contorno-verde); }
+.timer-controls button {
     padding: 10px 20px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: bold;
-    background-color: var(--success-color);
+    margin: 5px;
+    border-radius: 8px;
+    border: 2px solid var(--contorno-verde);
+    background: transparent;
     color: white;
+    cursor: pointer;
 }
+#btn-start { background: var(--contorno-verde); color: var(--azul-escuro); font-weight: bold; }
 
-.btn-timer.reset {
-    background-color: #e74c3c;
-}
+.time-group { display: flex; align-items: center; gap: 10px; }
