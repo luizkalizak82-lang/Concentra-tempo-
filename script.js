@@ -1,4 +1,4 @@
-// LOGIN
+// LÓGICA DE LOGIN
 document.getElementById('login-form').addEventListener('submit', (e) => {
     e.preventDefault();
     const nome = document.getElementById('login-name').value;
@@ -7,7 +7,7 @@ document.getElementById('login-form').addEventListener('submit', (e) => {
     document.getElementById('main-screen').classList.remove('hidden');
 });
 
-// NAVEGAÇÃO
+// NAVEGAÇÃO DE ABAS
 function switchTab(tab, event) {
     document.querySelectorAll('.tab-content').forEach(t => t.classList.add('hidden'));
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
@@ -28,14 +28,14 @@ document.getElementById('cronograma-form').addEventListener('submit', function(e
     li.className = 'item-card';
     li.id = id;
     li.innerHTML = `
-        <button class="btn-remove" onclick="document.getElementById('${id}').remove()">[X]</button>
-        <strong>MOD: ${mat.toUpperCase()}</strong><br>
-        <span>SEG: ${ass.toUpperCase()}</span><br>
-        <span style="color: var(--verde-neon);">🕒 ${ini} >> ${fim}</span><br>
+        <button class="btn-remove" onclick="document.getElementById('${id}').remove()">[REMOVER]</button>
+        <strong>MÓDULO: ${mat.toUpperCase()}</strong><br>
+        <span>SEGMENTO: ${ass.toUpperCase()}</span><br>
+        <span style="color: var(--verde-neon);">🕒 LINK: ${ini} >> ${fim}</span><br>
         <select onchange="updateStatus('${id}', this.value)" style="margin-top:10px; font-size: 10px;">
-            <option value="p">STATUS: PENDING</option>
-            <option value="concluido">STATUS: DONE</option>
-            <option value="n">STATUS: FAILED</option>
+            <option value="p">STATUS: PENDENTE</option>
+            <option value="concluido">STATUS: CONCLUÍDO</option>
+            <option value="n">STATUS: FALHA</option>
         </select>
     `;
     document.getElementById('lista-cronograma').appendChild(li);
@@ -47,29 +47,29 @@ function updateStatus(id, status) {
     el.classList.toggle('concluido', status === 'concluido');
 }
 
-// AGENDA
+// AGENDA DE PROVAS
 document.getElementById('prova-form').addEventListener('submit', function(e) {
     e.preventDefault();
     const mat = document.getElementById('prova-materia').value;
     const ass = document.getElementById('prova-assunto').value;
     const rawDate = document.getElementById('prova-data').value;
-    const dataFormatted = new Date(rawDate + 'T00:00:00').toLocaleDateString('pt-BR');
+    const dataFormatada = new Date(rawDate + 'T00:00:00').toLocaleDateString('pt-BR');
     
     const id = "p-" + Date.now();
     const li = document.createElement('li');
     li.className = 'item-card';
     li.id = id;
     li.innerHTML = `
-        <button class="btn-remove" onclick="document.getElementById('${id}').remove()">[X]</button>
-        <strong>EXAM: ${mat.toUpperCase()}</strong><br>
-        <span>SUB: ${ass.toUpperCase()}</span><br>
-        <span style="color: var(--verde-neon);">📅 DEADLINE: ${dataFormatted}</span>
+        <button class="btn-remove" onclick="document.getElementById('${id}').remove()">[APAGAR]</button>
+        <strong>ALVO: ${mat.toUpperCase()}</strong><br>
+        <span>ASSUNTO: ${ass.toUpperCase()}</span><br>
+        <span style="color: var(--verde-neon);">📅 PRAZO: ${dataFormatada}</span>
     `;
     document.getElementById('lista-provas').appendChild(li);
     this.reset();
 });
 
-// POMODORO
+// NÚCLEO POMODORO
 let timeLeft = 25 * 60;
 let timerId = null;
 
@@ -89,7 +89,7 @@ function startPomodoro() {
             updateTimer();
         } else {
             clearInterval(timerId);
-            alert("SESSION_COMPLETE");
+            alert("SESSÃO_CONCLUÍDA: CICLO_FECHADO");
             resetPomodoro();
         }
     }, 1000);
