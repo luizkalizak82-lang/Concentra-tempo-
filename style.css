@@ -9,7 +9,6 @@
 body {
     font-family: 'Courier New', Courier, monospace;
     background-color: var(--preto);
-    /* Padrão de fundo que lembra circuitos */
     background-image: 
         radial-gradient(var(--verde-neon) 0.5px, transparent 0.5px),
         linear-gradient(90deg, rgba(46, 204, 113, 0.03) 1px, transparent 1px),
@@ -43,7 +42,7 @@ input, select {
     margin: 10px 0;
     background-color: #050505;
     border: 1px solid var(--verde-escuro);
-    border-left: 4px solid var(--verde-neon); /* Detalhe de conector */
+    border-left: 4px solid var(--verde-neon);
     color: var(--branco);
     box-sizing: border-box;
 }
@@ -59,7 +58,6 @@ input, select {
     text-transform: uppercase;
 }
 
-/* Tabs Estilo Slots de Memória */
 .tabs {
     display: flex;
     margin: 20px 0;
@@ -86,7 +84,6 @@ input, select {
     border-color: var(--verde-neon);
 }
 
-/* Cartões */
 .lista { list-style: none; padding: 0; }
 
 .item-card {
@@ -110,7 +107,6 @@ input, select {
     cursor: pointer;
 }
 
-/* Pomodoro */
 .pomodoro-box { text-align: center; }
 #timer { font-size: 75px; color: var(--verde-neon); margin: 20px 0; }
 .timer-controls button {
