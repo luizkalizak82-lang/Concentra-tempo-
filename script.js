@@ -1,103 +1,108 @@
-// CONTROLE DE INTERFACE (LOGIN)
-document.getElementById('login-form').addEventListener('submit', function(e) {
+// CONTROLE DE LOGIN
+document.getElementById('login-form').addEventListener('submit', (e) => {
     e.preventDefault();
     const nome = document.getElementById('login-name').value;
-    
     document.getElementById('user-display').innerText = nome;
     document.getElementById('login-screen').classList.add('hidden');
     document.getElementById('main-screen').classList.remove('hidden');
 });
 
-// NAVEGAÇÃO ENTRE ABAS
-function switchTab(tabName) {
-    // Esconde todos os conteúdos
-    document.querySelectorAll('.tab-content').forEach(tab => tab.classList.add('hidden'));
-    // Remove classe ativa de todos os botões
-    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-    
-    // Mostra a aba clicada
-    document.getElementById(`tab-${tabName}`).classList.remove('hidden');
-    
-    // Adiciona classe ativa no botão clicado
-    const clickedBtn = event.currentTarget;
-    clickedBtn.classList.add('active');
+// TROCA DE ABAS
+function switchTab(tab) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.add('hidden'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(`tab-${tab}`).classList.remove('hidden');
+    event.currentTarget.classList.add('active');
 }
 
-// CADASTRO DE PROVAS (AGENDA)
-document.getElementById('prova-form').addEventListener('submit', function(e) {
+// CRONOGRAMA DIÁRIO
+document.getElementById('cronograma-form').addEventListener('submit', function(e) {
     e.preventDefault();
+    const mat = document.getElementById('cron-materia').value;
+    const ass = document.getElementById('cron-assunto').value;
+    const ini = document.getElementById('cron-inicio').value;
+    const fim = document.getElementById('cron-fim').value;
     
-    const materia = document.getElementById('prova-materia').value;
-    const dataInput = document.getElementById('prova-data').value; // Retorna AAAA-MM-DD
-    
-    // Formatando a data de AAAA-MM-DD para DD/MM/AAAA para exibição limpa
-    const dataObjeto = new Date(dataInput + 'T00:00:00'); 
-    const dia = String(dataObjeto.getDate()).padStart(2, '0');
-    const mes = String(dataObjeto.getMonth() + 1).padStart(2, '0');
-    const ano = dataObjeto.getFullYear();
-    const dataFormatada = `${dia}/${mes}/${ano}`;
-
-    // Adiciona na lista visual
-    const lista = document.getElementById('lista-provas');
-    const item = document.createElement('li');
-    item.innerHTML = `<span><strong>${materia}</strong></span> <span>📅 ${dataFormatada}</span>`;
-    lista.appendChild(item);
-
-    // Limpa o formulário
-    document.getElementById('prova-materia').value = '';
-    document.getElementById('prova-data').value = '';
+    const id = "cron-" + Date.now();
+    const li = document.createElement('li');
+    li.className = 'item-card';
+    li.id = id;
+    li.innerHTML = `
+        <button class="btn-remove" onclick="document.getElementById('${id}').remove()">X</button>
+        <strong>${mat}</strong><br>
+        <small>${ass}</small><br>
+        <span style="font-size: 13px;">🕒 ${ini} às ${fim}</span><br>
+        <select onchange="updateStatus('${id}', this.value)">
+            <option value="pendente">Pendente</option>
+            <option value="concluido">Concluído ✅</option>
+            <option value="nao-concluido">Não Concluído ❌</option>
+        </select>
+    `;
+    document.getElementById('lista-cronograma').appendChild(li);
+    this.reset();
 });
 
-// CRONÔMETRO POMODORO
-let timerInterval;
-let timerSeconds = 25 * 60; // 25 minutos em segundos
-let isPaused = true;
+function updateStatus(id, status) {
+    const el = document.getElementById(id);
+    el.classList.remove('concluido');
+    if(status === 'concluido') el.classList.add('concluido');
+}
 
-const timerDisplay = document.getElementById('timer');
-const btnStart = document.getElementById('btn-start');
-const btnPause = document.getElementById('btn-pause');
-const statusDisplay = document.getElementById('pomodoro-status');
+// AGENDA DE PROVAS
+document.getElementById('prova-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const mat = document.getElementById('prova-materia').value;
+    const rawDate = document.getElementById('prova-data').value;
+    const data = new Date(rawDate + 'T00:00:00').toLocaleDateString('pt-BR');
+    
+    const id = "prov-" + Date.now();
+    const li = document.createElement('li');
+    li.className = 'item-card';
+    li.id = id;
+    li.innerHTML = `
+        <button class="btn-remove" onclick="document.getElementById('${id}').remove()">X</button>
+        <strong>${mat}</strong><br>
+        📅 Prova: ${data}
+    `;
+    document.getElementById('lista-provas').appendChild(li);
+    this.reset();
+});
 
-function updateTimerDisplay() {
-    const minutes = Math.floor(timerSeconds / 60);
-    const seconds = timerSeconds % 60;
-    timerDisplay.innerText = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+// POMODORO
+let timeLeft = 25 * 60;
+let timerId = null;
+
+function updateTimer() {
+    const m = Math.floor(timeLeft / 60);
+    const s = timeLeft % 60;
+    document.getElementById('timer').innerText = `${m}:${s < 10 ? '0'+s : s}`;
 }
 
 function startPomodoro() {
-    if (isPaused) {
-        isPaused = false;
-        btnStart.classList.add('hidden');
-        btnPause.classList.remove('hidden');
-        statusDisplay.innerText = "Foco total nos estudos!";
-        
-        timerInterval = setInterval(() => {
-            if (timerSeconds > 0) {
-                timerSeconds--;
-                updateTimerDisplay();
-            } else {
-                clearInterval(timerInterval);
-                alert("Pomodoro finalizado! Hora de uma pausa.");
-                resetPomodoro();
-            }
-        }, 1000);
-    }
+    if (timerId) return;
+    document.getElementById('btn-start').classList.add('hidden');
+    document.getElementById('btn-pause').classList.remove('hidden');
+    timerId = setInterval(() => {
+        if (timeLeft > 0) {
+            timeLeft--;
+            updateTimer();
+        } else {
+            clearInterval(timerId);
+            alert("Tempo de foco encerrado!");
+            resetPomodoro();
+        }
+    }, 1000);
 }
 
 function pausePomodoro() {
-    isPaused = true;
-    clearInterval(timerInterval);
-    btnStart.classList.remove('hidden');
-    btnPause.classList.add('hidden');
-    statusDisplay.innerText = "Timer pausado.";
+    clearInterval(timerId);
+    timerId = null;
+    document.getElementById('btn-start').classList.remove('hidden');
+    document.getElementById('btn-pause').classList.add('hidden');
 }
 
 function resetPomodoro() {
-    clearInterval(timerInterval);
-    isPaused = true;
-    timerSeconds = 25 * 60;
-    updateTimerDisplay();
-    btnStart.classList.remove('hidden');
-    btnPause.classList.add('hidden');
-    statusDisplay.innerText = "Hora de Focar!";
+    pausePomodoro();
+    timeLeft = 25 * 60;
+    updateTimer();
 }
