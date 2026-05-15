@@ -3,75 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Plataforma de Estudos - Azul e Verde</title>
+    <title>SISTEMA DE ESTUDOS - CORE UNIT</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 
     <div id="login-screen" class="container">
-        <h2>Login</h2>
+        <h2><i class="fas fa-terminal"></i> LOGIN_SYSTEM</h2>
         <form id="login-form">
             <div class="input-group">
-                <label>Nome:</label>
-                <input type="text" id="login-name" required placeholder="Digite seu nome">
+                <label>NOME_USER:</label>
+                <input type="text" id="login-name" required placeholder="Inserir nome...">
             </div>
             <div class="input-group">
-                <label>Usuário:</label>
-                <input type="text" id="login-user" required placeholder="Digite seu usuário">
+                <label>ID_USER:</label>
+                <input type="text" id="login-user" required placeholder="Inserir usuário...">
             </div>
             <div class="input-group">
-                <label>Senha:</label>
-                <input type="password" id="login-password" required placeholder="Digite sua senha">
+                <label>PASS_KEY:</label>
+                <input type="password" id="login-password" required placeholder="******">
             </div>
-            <button type="submit" class="btn">Acessar Sistema</button>
+            <button type="submit" class="btn">BOOT_SYSTEM</button>
         </form>
     </div>
 
     <div id="main-screen" class="container hidden">
         <header>
-            <h3>Bem-vindo(a), <span id="user-display"></span>!</h3>
+            <h3>STATUS: ONLINE | USER: <span id="user-display" style="color: var(--verde-neon);"></span></h3>
             <div class="tabs">
-                <button class="tab-btn active" onclick="switchTab('cronograma')">📅 Cronograma</button>
-                <button class="tab-btn" onclick="switchTab('agenda')">📝 Agenda</button>
-                <button class="tab-btn" onclick="switchTab('foco')">⏱️ Foco</button>
+                <button class="tab-btn active" onclick="switchTab('cronograma', event)">
+                    <i class="fas fa-microchip"></i>
+                    <span>CRONOGRAMA</span>
+                </button>
+                <button class="tab-btn" onclick="switchTab('agenda', event)">
+                    <i class="fas fa-memory"></i>
+                    <span>AGENDA</span>
+                </button>
+                <button class="tab-btn" onclick="switchTab('foco', event)">
+                    <i class="fas fa-bolt"></i>
+                    <span>FOCO</span>
+                </button>
             </div>
         </header>
 
         <main>
             <section id="tab-cronograma" class="tab-content">
-                <h4>Cronograma Diário</h4>
+                <h4><i class="fas fa-list-check"></i> DAILY_LOG</h4>
                 <form id="cronograma-form">
-                    <input type="text" id="cron-materia" placeholder="Matéria" required>
-                    <input type="text" id="cron-assunto" placeholder="Assunto" required>
+                    <input type="text" id="cron-materia" placeholder="MATÉRIA" required>
+                    <input type="text" id="cron-assunto" placeholder="ASSUNTO" required>
                     <div class="time-group">
                         <input type="time" id="cron-inicio" required>
-                        <span style="color: white;">até</span>
+                        <span class="connector-line"></span>
                         <input type="time" id="cron-fim" required>
                     </div>
-                    <button type="submit" class="btn-add">Adicionar Matéria</button>
+                    <button type="submit" class="btn-add">INPUT_DATA</button>
                 </form>
                 <ul id="lista-cronograma" class="lista"></ul>
             </section>
 
             <section id="tab-agenda" class="tab-content hidden">
-                <h4>Agenda de Provas</h4>
+                <h4><i class="fas fa-calendar-day"></i> EXAM_STORAGE</h4>
                 <form id="prova-form">
-                    <input type="text" id="prova-materia" placeholder="Matéria da Prova" required>
+                    <input type="text" id="prova-materia" placeholder="MATÉRIA" required>
+                    <input type="text" id="prova-assunto" placeholder="ASSUNTO DA PROVA" required>
                     <input type="date" id="prova-data" required>
-                    <button type="submit" class="btn-add">Agendar Prova</button>
+                    <button type="submit" class="btn-add">SAVE_DATE</button>
                 </form>
                 <ul id="lista-provas" class="lista"></ul>
             </section>
 
             <section id="tab-foco" class="tab-content hidden">
-                <h4>Técnica Pomodoro</h4>
+                <h4><i class="fas fa-stopwatch"></i> POMODORO_CORE</h4>
                 <div class="pomodoro-box">
-                    <div id="pomodoro-status">Foco Ativo</div>
+                    <div id="pomodoro-status">SYSTEM_ACTIVE</div>
                     <div id="timer">25:00</div>
                     <div class="timer-controls">
-                        <button id="btn-start" onclick="startPomodoro()">Iniciar</button>
-                        <button id="btn-pause" class="hidden" onclick="pausePomodoro()">Pausar</button>
-                        <button id="btn-reset" onclick="resetPomodoro()">Reiniciar</button>
+                        <button id="btn-start" onclick="startPomodoro()">START</button>
+                        <button id="btn-pause" class="hidden" onclick="pausePomodoro()">PAUSE</button>
+                        <button id="btn-reset" onclick="resetPomodoro()">RESET</button>
                     </div>
                 </div>
             </section>
