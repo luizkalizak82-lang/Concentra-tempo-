@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plataforma de Estudos</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- TELA DE LOGIN -->
+    <div id="login-screen" class="container">
+        <h2>Login</h2>
+        <form id="login-form">
+            <div class="input-group">
+                <label for="login-name">Nome:</label>
+                <input type="text" id="login-name" required placeholder="Digite seu nome">
+            </div>
+            <div class="input-group">
+                <label for="login-user">Usuário:</label>
+                <input type="text" id="login-user" required placeholder="Digite seu usuário">
+            </div>
+            <div class="input-group">
+                <label for="login-password">Senha:</label>
+                <input type="password" id="login-password" required placeholder="Digite sua senha">
+            </div>
+            <button type="submit" class="btn">Acessar Cronograma</button>
+        </form>
+    </div>
+
+    <!-- SEGUNDA INTERFACE (PAINEL PRINCIPAL) -->
+    <div id="main-screen" class="container hidden">
+        <header>
+            <h3>Bem-vindo(a), <span id="user-display"></span>!</h3>
+            <!-- Abas de Navegação Superiores -->
+            <div class="tabs">
+                <button class="tab-btn active" onclick="switchTab('cronograma')">📅 Cronograma</button>
+                <button class="tab-btn" onclick="switchTab('agenda')">📝 Agenda de Provas</button>
+                <button class="tab-btn" onclick="switchTab('foco')">⏱️ Foco</button>
+            </div>
+        </header>
+
+        <main>
+            <!-- ABA 1: CRONOGRAMA -->
+            <section id="tab-cronograma" class="tab-content">
+                <h4>Cronograma Diário</h4>
+                <div class="card">
+                    <h5>Matéria do Dia</h5>
+                    <p><strong>Matéria:</strong> <span id="cron-materia">Desenvolvimento Web</span></p>
+                    <p><strong>Assunto:</strong> <span id="cron-assunto">Estruturas HTML, CSS e JavaScript</span></p>
+                    <label class="checkbox-container">
+                        <input type="checkbox"> Marcar como concluído o estudo de hoje
+                    </label>
+                </div>
+            </section>
+
+            <!-- ABA 2: AGENDA DE PROVAS -->
+            <section id="tab-agenda" class="tab-content hidden">
+                <h4>Agenda de Provas</h4>
+                <form id="prova-form">
+                    <div class="input-group">
+                        <input type="text" id="prova-materia" placeholder="Nome da Matéria" required>
+                    </div>
+                    <div class="input-group">
+                        <!-- Calendário completo: Dia, Mês e Ano -->
+                        <input type="date" id="prova-data" required>
+                    </div>
+                    <button type="submit" class="btn">Adicionar Prova</button>
+                </form>
+                
+                <ul id="lista-provas" class="lista">
+                    <!-- As provas adicionadas vão aparecer aqui -->
+                </ul>
+            </section>
+
+            <!-- ABA 3: FOCO (POMODORO) -->
+            <section id="tab-foco" class="tab-content hidden">
+                <h4>Foco - Timer Pomodoro</h4>
+                <div class="pomodoro-container">
+                    <div id="pomodoro-status">Hora de Focar!</div>
+                    <div id="timer">25:00</div>
+                    <div class="timer-controls">
+                        <button id="btn-start" class="btn-timer" onclick="startPomodoro()">Iniciar</button>
+                        <button id="btn-pause" class="btn-timer hidden" onclick="pausePomodoro()">Pausar</button>
+                        <button class="btn-timer reset" onclick="resetPomodoro()">Reiniciar</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
