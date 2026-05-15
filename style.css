@@ -1,124 +1,126 @@
 :root {
-    --fundo-azul: #004488;
-    --texto-branco: #ffffff;
-    --contorno-verde: #2ecc71;
-    --azul-escuro: #003366;
+    --preto: #000000;
+    --preto-suave: #0d0d0d;
+    --verde-neon: #2ecc71;
+    --verde-escuro: #1a5935;
+    --branco: #ffffff;
 }
 
 body {
-    font-family: 'Segoe UI', sans-serif;
-    background-color: var(--fundo-azul);
-    color: var(--texto-branco);
+    font-family: 'Courier New', Courier, monospace;
+    background-color: var(--preto);
+    /* Padrão de fundo que lembra circuitos */
+    background-image: 
+        radial-gradient(var(--verde-neon) 0.5px, transparent 0.5px),
+        linear-gradient(90deg, rgba(46, 204, 113, 0.03) 1px, transparent 1px),
+        linear-gradient(rgba(46, 204, 113, 0.03) 1px, transparent 1px);
+    background-size: 30px 30px, 15px 15px, 15px 15px;
+    color: var(--branco);
+    margin: 0;
     display: flex;
     justify-content: center;
+    min-height: 100vh;
     padding: 20px;
-    margin: 0;
 }
 
 .container {
-    background-color: var(--azul-escuro);
-    padding: 25px;
-    border-radius: 15px;
-    border: 2px solid var(--contorno-verde); /* Contorno verde principal */
+    background-color: var(--preto-suave);
+    padding: 30px;
+    border-radius: 5px;
+    border: 2px solid var(--verde-neon);
     width: 100%;
-    max-width: 450px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    max-width: 480px;
+    box-shadow: 0 0 25px rgba(46, 204, 113, 0.15);
 }
 
 .hidden { display: none !important; }
 
-h2, h3, h4 { color: var(--texto-branco); text-align: center; }
+h2, h3, h4 { color: var(--verde-neon); text-align: center; letter-spacing: 1px; }
 
-/* Inputs e Botões */
 input, select {
     width: 100%;
     padding: 12px;
-    margin: 8px 0;
-    border: 2px solid var(--contorno-verde); /* Contorno verde nos campos */
-    border-radius: 8px;
-    background: #002244;
-    color: white;
+    margin: 10px 0;
+    background-color: #050505;
+    border: 1px solid var(--verde-escuro);
+    border-left: 4px solid var(--verde-neon); /* Detalhe de conector */
+    color: var(--branco);
     box-sizing: border-box;
 }
-
-::placeholder { color: #aaa; }
 
 .btn, .btn-add {
     width: 100%;
     padding: 12px;
-    background-color: var(--contorno-verde);
-    color: var(--azul-escuro);
+    background-color: var(--verde-neon);
+    color: var(--preto);
     border: none;
-    border-radius: 8px;
-    cursor: pointer;
     font-weight: bold;
-    font-size: 16px;
-    margin-top: 10px;
+    cursor: pointer;
+    text-transform: uppercase;
 }
 
-.btn:hover, .btn-add:hover { background-color: #27ae60; }
-
-/* Abas */
+/* Tabs Estilo Slots de Memória */
 .tabs {
     display: flex;
-    gap: 5px;
     margin: 20px 0;
-    border-bottom: 2px solid var(--contorno-verde);
+    gap: 5px;
 }
 
 .tab-btn {
-    flex: 1;
+    background: #0a0a0a;
+    border: 1px solid var(--verde-escuro);
+    color: var(--branco);
     padding: 10px;
-    border: none;
-    background: none;
     cursor: pointer;
-    color: #ccc;
-    font-weight: bold;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 10px;
 }
+
+.tab-btn i { font-size: 18px; margin-bottom: 5px; color: var(--verde-neon); }
 
 .tab-btn.active {
-    color: var(--contorno-verde);
-    border-bottom: 3px solid var(--contorno-verde);
+    background: var(--verde-escuro);
+    border-color: var(--verde-neon);
 }
 
-/* Lista de Tarefas */
-.lista { list-style: none; padding: 0; margin-top: 20px; }
+/* Cartões */
+.lista { list-style: none; padding: 0; }
 
 .item-card {
-    background: #003366;
+    background: #080808;
+    border: 1px solid var(--verde-escuro);
+    border-right: 4px solid var(--verde-neon);
     padding: 15px;
-    border-radius: 10px;
-    margin-bottom: 10px;
-    border: 2px solid var(--contorno-verde); /* Contorno verde nos cartões */
+    margin-bottom: 15px;
     position: relative;
 }
 
-.item-card.concluido {
-    background-color: #064d25;
-    border-color: #ffffff;
-}
+.item-card.concluido { border-color: var(--branco); background: #001a0a; }
 
 .btn-remove {
+    position: absolute;
+    top: 5px;
+    right: 10px;
     background: none;
     color: #ff4d4d;
     border: none;
-    font-weight: bold;
     cursor: pointer;
-    float: right;
 }
 
 /* Pomodoro */
 .pomodoro-box { text-align: center; }
-#timer { font-size: 70px; font-weight: bold; margin: 20px 0; color: var(--contorno-verde); }
+#timer { font-size: 75px; color: var(--verde-neon); margin: 20px 0; }
 .timer-controls button {
-    padding: 10px 20px;
-    margin: 5px;
-    border-radius: 8px;
-    border: 2px solid var(--contorno-verde);
     background: transparent;
-    color: white;
+    border: 1px solid var(--verde-neon);
+    color: var(--verde-neon);
+    padding: 10px 15px;
+    margin: 5px;
     cursor: pointer;
 }
-#btn-start { background: var(--contorno-verde); color: var(--azul-escuro); font-weight: bold; }
 
 .time-group { display: flex; align-items: center; gap: 10px; }
+.connector-line { width: 20px; height: 2px; background: var(--verde-neon); }
