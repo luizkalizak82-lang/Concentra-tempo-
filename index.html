@@ -3,34 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SISTEMA DE ESTUDOS - CORE UNIT</title>
+    <title>SISTEMA DE ESTUDOS - NÚCLEO CENTRAL</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
 
     <div id="login-screen" class="container">
-        <h2><i class="fas fa-terminal"></i> LOGIN_SYSTEM</h2>
+        <h2><i class="fas fa-terminal"></i> LOGIN_SISTEMA</h2>
         <form id="login-form">
             <div class="input-group">
-                <label>NOME_USER:</label>
-                <input type="text" id="login-name" required placeholder="Inserir nome...">
+                <label>NOME_USUÁRIO:</label>
+                <input type="text" id="login-name" required placeholder="Insira seu nome...">
             </div>
             <div class="input-group">
-                <label>ID_USER:</label>
-                <input type="text" id="login-user" required placeholder="Inserir usuário...">
+                <label>ID_USUÁRIO:</label>
+                <input type="text" id="login-user" required placeholder="Usuário...">
             </div>
             <div class="input-group">
-                <label>PASS_KEY:</label>
+                <label>CHAVE_ACESSO:</label>
                 <input type="password" id="login-password" required placeholder="******">
             </div>
-            <button type="submit" class="btn">BOOT_SYSTEM</button>
+            <button type="submit" class="btn">INICIAR_SISTEMA</button>
         </form>
     </div>
 
     <div id="main-screen" class="container hidden">
         <header>
-            <h3>STATUS: ONLINE | USER: <span id="user-display" style="color: var(--verde-neon);"></span></h3>
+            <h3>STATUS: ONLINE | USUÁRIO: <span id="user-display" style="color: var(--verde-neon);"></span></h3>
             <div class="tabs">
                 <button class="tab-btn active" onclick="switchTab('cronograma', event)">
                     <i class="fas fa-microchip"></i>
@@ -49,7 +49,7 @@
 
         <main>
             <section id="tab-cronograma" class="tab-content">
-                <h4><i class="fas fa-list-check"></i> DAILY_LOG</h4>
+                <h4><i class="fas fa-list-check"></i> REGISTRO_DIÁRIO</h4>
                 <form id="cronograma-form">
                     <input type="text" id="cron-materia" placeholder="MATÉRIA" required>
                     <input type="text" id="cron-assunto" placeholder="ASSUNTO" required>
@@ -58,31 +58,31 @@
                         <span class="connector-line"></span>
                         <input type="time" id="cron-fim" required>
                     </div>
-                    <button type="submit" class="btn-add">INPUT_DATA</button>
+                    <button type="submit" class="btn-add">INSERIR_DADOS</button>
                 </form>
                 <ul id="lista-cronograma" class="lista"></ul>
             </section>
 
             <section id="tab-agenda" class="tab-content hidden">
-                <h4><i class="fas fa-calendar-day"></i> EXAM_STORAGE</h4>
+                <h4><i class="fas fa-calendar-day"></i> ARMAZENAMENTO_PROVAS</h4>
                 <form id="prova-form">
                     <input type="text" id="prova-materia" placeholder="MATÉRIA" required>
                     <input type="text" id="prova-assunto" placeholder="ASSUNTO DA PROVA" required>
                     <input type="date" id="prova-data" required>
-                    <button type="submit" class="btn-add">SAVE_DATE</button>
+                    <button type="submit" class="btn-add">SALVAR_DATA</button>
                 </form>
                 <ul id="lista-provas" class="lista"></ul>
             </section>
 
             <section id="tab-foco" class="tab-content hidden">
-                <h4><i class="fas fa-stopwatch"></i> POMODORO_CORE</h4>
+                <h4><i class="fas fa-stopwatch"></i> NÚCLEO_POMODORO</h4>
                 <div class="pomodoro-box">
-                    <div id="pomodoro-status">SYSTEM_ACTIVE</div>
+                    <div id="pomodoro-status">SISTEMA_ATIVO</div>
                     <div id="timer">25:00</div>
                     <div class="timer-controls">
-                        <button id="btn-start" onclick="startPomodoro()">START</button>
-                        <button id="btn-pause" class="hidden" onclick="pausePomodoro()">PAUSE</button>
-                        <button id="btn-reset" onclick="resetPomodoro()">RESET</button>
+                        <button id="btn-start" onclick="startPomodoro()">INICIAR</button>
+                        <button id="btn-pause" class="hidden" onclick="pausePomodoro()">PAUSAR</button>
+                        <button id="btn-reset" onclick="resetPomodoro()">REINICIAR</button>
                     </div>
                 </div>
             </section>
